@@ -77,7 +77,7 @@ public class MarkLogicConnectionTest
             .withMarklogicConnectionType(MarkLogicConnectionType.DIRECT)
             .withConnectionId(CONNECTION_ID));
         String result = instance.getId();
-        assertEquals(CONNECTION_ID, result);
+        Assert.assertEquals(CONNECTION_ID, result);
     }
     
     @Test
@@ -93,7 +93,7 @@ public class MarkLogicConnectionTest
             .withMarklogicConnectionType(MarkLogicConnectionType.DIRECT)
             .withConnectionId(CONNECTION_ID));
 
-        assertFalse(instance.isConnected(PORT));
+        Assert.assertFalse(instance.isConnected(PORT));
     }
 
     /**
@@ -102,7 +102,7 @@ public class MarkLogicConnectionTest
     @Test
     public void testInvalidate()
     {
-        MarkLogicConnectionInvalidationListener listener = mock(MarkLogicConnectionInvalidationListener.class);
+        MarkLogicConnectionInvalidationListener listener = Mockito.mock(MarkLogicConnectionInvalidationListener.class);
 
         MarkLogicConnection instance = new MarkLogicConnection(new MarkLogicConnectionProvider()
             .withHostname(LOCALHOST)
@@ -118,7 +118,7 @@ public class MarkLogicConnectionTest
         instance.invalidate();
         instance.removeMarkLogicClientInvalidationListener(listener);
         
-        verify(listener).markLogicConnectionInvalidated();
+        Mockito.verify(listener).markLogicConnectionInvalidated();
         
     }
 
@@ -140,7 +140,7 @@ public class MarkLogicConnectionTest
 
         instance.connect();
         boolean result = instance.isConnected(PORT);
-        assertEquals(true, result);
+        Assert.assertEquals(true, result);
     }
 
     /**
@@ -160,7 +160,7 @@ public class MarkLogicConnectionTest
 
         instance.connect();
         boolean result = instance.isConnected(8001);
-        assertEquals(false, result);
+        Assert.assertEquals(false, result);
     }
 
     //----------------- Digest & Default Authentication Tests ----------------//
@@ -200,11 +200,11 @@ public class MarkLogicConnectionTest
 
         DatabaseClientFactory.SecurityContext securityContext = result.getSecurityContext();
 
-        assertTrue(securityContext instanceof DigestAuthContext);
+        Assert.assertTrue(securityContext instanceof DigestAuthContext);
         DigestAuthContext digest = (DigestAuthContext) securityContext;
 
-        assertEquals(USER_NAME, digest.getUser());
-        assertEquals(USER_PASSWORD, digest.getPassword());
+        Assert.assertEquals(USER_NAME, digest.getUser());
+        Assert.assertEquals(USER_PASSWORD, digest.getPassword());
     }
 
     //----------------- Basic Authentication Tests ---------------------------//
@@ -238,11 +238,11 @@ public class MarkLogicConnectionTest
 
         DatabaseClientFactory.SecurityContext securityContext = result.getSecurityContext();
 
-        assertTrue(securityContext instanceof BasicAuthContext);
+        Assert.assertTrue(securityContext instanceof BasicAuthContext);
         BasicAuthContext digest = (BasicAuthContext) securityContext;
 
-        assertEquals(USER_NAME, digest.getUser());
-        assertEquals(USER_PASSWORD, digest.getPassword());
+        Assert.assertEquals(USER_NAME, digest.getUser());
+        Assert.assertEquals(USER_PASSWORD, digest.getPassword());
     }
 
     //----------------- Keystore Authentication Tests ------------------------//
@@ -295,7 +295,7 @@ public class MarkLogicConnectionTest
 
         DatabaseClientFactory.SecurityContext securityContext = result.getSecurityContext();
 
-        assertTrue(securityContext instanceof CertificateAuthContext);
+        Assert.assertTrue(securityContext instanceof CertificateAuthContext);
         /*CertificateAuthContext digest = (CertificateAuthContext) securityContext;
 
         assertEquals(USER_NAME, digest.getUser());
@@ -422,7 +422,7 @@ These tests are currently invalid as KERBEROS is not an option at this time
             .withConnectionId(CONNECTION_ID));
 
         instance.connect();
-        assertTrue(true);
+        Assert.assertTrue(true);
     }
 
     //----------------- Default Level Authentication Tests -------------------//
@@ -457,21 +457,21 @@ These tests are currently invalid as KERBEROS is not an option at this time
 
     protected void databaseClientAssert(DatabaseClient client, boolean compareDbName)
     {
-        assertEquals(LOCALHOST, client.getHost());
-        assertEquals(PORT, client.getPort());
+        Assert.assertEquals(LOCALHOST, client.getHost());
+        Assert.assertEquals(PORT, client.getPort());
         if (compareDbName)
         {
-            assertEquals(DATABASE_NAME, client.getDatabase());
+            Assert.assertEquals(DATABASE_NAME, client.getDatabase());
         }
     }
 
     protected void sslDatabaseClientAssert(DatabaseClient client, boolean compareDbName)
     {
-        assertEquals(LOCALHOST, client.getHost());
-        assertEquals(SSL_PORT, client.getPort());
+        Assert.assertEquals(LOCALHOST, client.getHost());
+        Assert.assertEquals(SSL_PORT, client.getPort());
         if (compareDbName)
         {
-            assertEquals(DATABASE_NAME, client.getDatabase());
+            Assert.assertEquals(DATABASE_NAME, client.getDatabase());
         }
     }
 }

@@ -28,32 +28,32 @@ public class MarkLogicMimeTypeTestCase
     @Test
     public void testXml() {
         MarkLogicMimeType type = MarkLogicMimeType.fromString("application/xml");
-        assertEquals(MarkLogicMimeType.xml, type);
-        assertNotNull(type.getRecordExtractor());
-        assertThat(type.getRecordExtractor(), instanceOf(MarkLogicXMLRecordExtractor.class));
+        Assert.assertEquals(MarkLogicMimeType.xml, type);
+        Assert.assertNotNull(type.getRecordExtractor());
+        Assert.assertThat(type.getRecordExtractor(), CoreMatchers.instanceOf(MarkLogicXMLRecordExtractor.class));
     }
     
     @Test
     public void testJson() {
         MarkLogicMimeType type = MarkLogicMimeType.fromString("application/json");
-        assertEquals(MarkLogicMimeType.json, type);
-        assertNotNull(type.getRecordExtractor());
-        assertThat(type.getRecordExtractor(), instanceOf(MarkLogicJSONRecordExtractor.class));
+        Assert.assertEquals(MarkLogicMimeType.json, type);
+        Assert.assertNotNull(type.getRecordExtractor());
+        Assert.assertThat(type.getRecordExtractor(), CoreMatchers.instanceOf(MarkLogicJSONRecordExtractor.class));
     }
 
     @Test
     public void testText() {
         MarkLogicMimeType type = MarkLogicMimeType.fromString("application/text");
-        assertEquals(MarkLogicMimeType.text, type);
-        assertNotNull(type.getRecordExtractor());
-        assertThat(type.getRecordExtractor(), instanceOf(MarkLogicTextRecordExtractor.class));
+        Assert.assertEquals(MarkLogicMimeType.text, type);
+        Assert.assertNotNull(type.getRecordExtractor());
+        Assert.assertThat(type.getRecordExtractor(), CoreMatchers.instanceOf(MarkLogicTextRecordExtractor.class));
     }
 
     @Test
     public void testBinary() {
         MarkLogicMimeType type = MarkLogicMimeType.fromString(null);
-        assertEquals(MarkLogicMimeType.binary, type);
-        assertNotNull(type.getRecordExtractor());
-        assertThat(type.getRecordExtractor(), instanceOf(MarkLogicBinaryRecordExtractor.class));
+        Assert.assertEquals(MarkLogicMimeType.binary, type);
+        Assert.assertNotNull(type.getRecordExtractor());
+        Assert.assertThat(type.getRecordExtractor(), CoreMatchers.instanceOf(MarkLogicBinaryRecordExtractor.class));
     }
 }

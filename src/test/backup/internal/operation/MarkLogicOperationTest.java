@@ -118,7 +118,7 @@ public class MarkLogicOperationTest {
             JsonNode jsonMap = objectMapper.readTree(is);
             JsonNode delresult = jsonMap.get("deletionResult");
             String result = delresult.textValue();
-            assertEquals("0 document(s) deleted", result);
+            Assert.assertEquals("0 document(s) deleted", result);
         } catch(IOException ex) {
             LOGGER.error(String.format("Exception was thrown during deleteDocs operation. Error was: %s", ex.getMessage()), ex);
         } finally {
@@ -136,6 +136,6 @@ public class MarkLogicOperationTest {
         String serverTransformParams = "text,hello";
         connection.connect();
         PagingProvider<MarkLogicConnection, Object> export = operation.exportDocs(configuration, queryString, optionsName, MarkLogicQueryStrategy.RawStructuredQueryDefinition, MarkLogicQueryFormat.JSON, resultCount, useConsistentSnapshot, serverTransform, serverTransformParams);
-        assertEquals("Optional.empty", export.getTotalResults(connection).toString());
+        Assert.assertEquals("Optional.empty", export.getTotalResults(connection).toString());
     }
 }

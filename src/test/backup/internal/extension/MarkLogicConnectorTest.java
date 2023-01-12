@@ -26,7 +26,7 @@ public class MarkLogicConnectorTest
     @Test
     public void testExtensionCreation()
     {
-        assertNotNull(new MarkLogicConnector());
+        Assert.assertNotNull(new MarkLogicConnector());
     }
 
 }

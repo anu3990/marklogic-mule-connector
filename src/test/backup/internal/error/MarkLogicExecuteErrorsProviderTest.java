@@ -35,8 +35,8 @@ public class MarkLogicExecuteErrorsProviderTest
         MarkLogicExecuteErrorsProvider instance = new MarkLogicExecuteErrorsProvider();
         Set<ErrorTypeDefinition> result = instance.getErrorTypes();
 
-        assertEquals(1, result.size());
-        assertTrue(result.contains(MarkLogicConnectorSimpleErrorType.DATA_MOVEMENT_ERROR));
+        Assert.assertEquals(1, result.size());
+        Assert.assertTrue(result.contains(MarkLogicConnectorSimpleErrorType.DATA_MOVEMENT_ERROR));
     }
 
 }

@@ -51,7 +51,7 @@ public class MarkLogicConnectionProviderTest
             .withConnectionId(CONNECTION_ID);
 
         MarkLogicConnection result = provider.connect();
-        assertEquals(CONNECTION_ID, result.getId());
+        Assert.assertEquals(CONNECTION_ID, result.getId());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class MarkLogicConnectionProviderTest
 
         MarkLogicConnection connection = provider.connect();
         provider.disconnect(connection);
-        assertTrue(true);
+        Assert.assertTrue(true);
     }
 
     /**
@@ -93,7 +93,7 @@ public class MarkLogicConnectionProviderTest
 
         ConnectionValidationResult result = provider.validate(connection);
 
-        assertTrue(result.isValid());
+        Assert.assertTrue(result.isValid());
 
     }
 
@@ -114,8 +114,8 @@ public class MarkLogicConnectionProviderTest
         ConnectionValidationResult result = provider.validate(connection);
 
         String message = String.format("Connection failed %s", CONNECTION_ID);
-        assertEquals(message, result.getMessage());
-        assertTrue(result.getException() instanceof Exception);
+        Assert.assertEquals(message, result.getMessage());
+        Assert.assertTrue(result.getException() instanceof Exception);
     }
 
 }

@@ -34,7 +34,7 @@ public class MarkLogicSelectMetadataResolverTest
         MarkLogicSelectMetadataResolver instance = new MarkLogicSelectMetadataResolver();
         String expResult = "MarkLogicSelectResolver";
         String result = instance.getResolverName();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -48,7 +48,7 @@ public class MarkLogicSelectMetadataResolverTest
         MarkLogicSelectMetadataResolver instance = new MarkLogicSelectMetadataResolver();
         MetadataType expResult = null;
         MetadataType result = instance.getOutputType(metadataContext, s);
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
 
     }
 
@@ -61,7 +61,7 @@ public class MarkLogicSelectMetadataResolverTest
         MarkLogicSelectMetadataResolver instance = new MarkLogicSelectMetadataResolver();
         String expResult = "MarkLogicCategory";
         String result = instance.getCategoryName();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
 }

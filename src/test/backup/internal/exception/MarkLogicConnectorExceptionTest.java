@@ -30,7 +30,7 @@ public class MarkLogicConnectorExceptionTest
         String errorMsg = "Test MarkLogic Connection Exception";
         MarkLogicConnectorException exception = new MarkLogicConnectorException(errorMsg);
 
-        assertEquals(errorMsg, exception.getMessage());
+        Assert.assertEquals(errorMsg, exception.getMessage());
     }
 
     @Test
@@ -41,9 +41,9 @@ public class MarkLogicConnectorExceptionTest
         Exception error = new RuntimeException(thrownMsg);
         MarkLogicConnectorException exception = new MarkLogicConnectorException(errorMsg, error);
 
-        assertEquals(errorMsg, exception.getMessage());
-        assertTrue(exception.getCause() instanceof RuntimeException);
-        assertEquals(thrownMsg, exception.getCause().getMessage());
+        Assert.assertEquals(errorMsg, exception.getMessage());
+        Assert.assertTrue(exception.getCause() instanceof RuntimeException);
+        Assert.assertEquals(thrownMsg, exception.getCause().getMessage());
     }
 
 }

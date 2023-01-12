@@ -46,7 +46,7 @@ public class MarkLogicConfigurationTest
         String expResult = "configuration-id-test-123";
         instance.setConfigId(expResult);
         String result = instance.getConfigId();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -58,7 +58,7 @@ public class MarkLogicConfigurationTest
         int expResult = 64;
         instance.setThreadCount(expResult);
         int result = instance.getThreadCount();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -70,7 +70,7 @@ public class MarkLogicConfigurationTest
         int expResult = 250;
         instance.setBatchSize(expResult);
         int result = instance.getBatchSize();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -82,7 +82,7 @@ public class MarkLogicConfigurationTest
         String expResult = "TestTransform";
         instance.setServerTransform(expResult);
         String result = instance.getServerTransform();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -94,7 +94,7 @@ public class MarkLogicConfigurationTest
         String expResult = "entity-name,MyEntity,flow-name,loadMyEntity";
         instance.setServerTransformParams(expResult);
         String result = instance.getServerTransformParams();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -106,7 +106,7 @@ public class MarkLogicConfigurationTest
         int expResult = 2;
         instance.setSecondsBeforeFlush(expResult);
         int result = instance.getSecondsBeforeFlush();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -118,7 +118,7 @@ public class MarkLogicConfigurationTest
         String expResult = "TestJobName";
         instance.setJobName(expResult);
         String result = instance.getJobName();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
@@ -127,65 +127,65 @@ public class MarkLogicConfigurationTest
     @Test
     public void testIsDefined()
     {
-        assertTrue(MarkLogicConfiguration.isDefined("TestTransformName"));
+        Assert.assertTrue(MarkLogicConfiguration.isDefined("TestTransformName"));
     }
     
     @Test
     public void testIsDefinedNull()
     {
-        assertFalse(MarkLogicConfiguration.isDefined(null));
+        Assert.assertFalse(MarkLogicConfiguration.isDefined(null));
     }
 
     @Test
     public void testIsDefinedEmptyString()
     {
-        assertFalse(MarkLogicConfiguration.isDefined(""));
+        Assert.assertFalse(MarkLogicConfiguration.isDefined(""));
     }
 
     @Test
     public void testIsDefinedBlankString()
     {
-        assertFalse(MarkLogicConfiguration.isDefined(" ")); //In case a user enters a space/tab
+        Assert.assertFalse(MarkLogicConfiguration.isDefined(" ")); //In case a user enters a space/tab
     }
 
     @Test
     public void testIsDefinedNullString()
     {
-        assertFalse(MarkLogicConfiguration.isDefined("null"));
+        Assert.assertFalse(MarkLogicConfiguration.isDefined("null"));
     }
 
     @Test
     public void testIsDefinedNullCapString()
     {
-        assertFalse(MarkLogicConfiguration.isDefined("NULL"));
+        Assert.assertFalse(MarkLogicConfiguration.isDefined("NULL"));
     }
 
     @Test
     public void testConfigEquals()
     {
-        assertEquals(instance,instance);
-        assertEquals(instance,instance2);
+        Assert.assertEquals(instance,instance);
+        Assert.assertEquals(instance,instance2);
     }
 
     @Test
     public void testConfigNotEquals()
     {
-        assertNotEquals(instance,null);
-        assertNotEquals(instance, instance.generateServerTransform("TestTransform", null));
+        Assert.assertNotEquals(instance,null);
+        Assert.assertNotEquals(instance, instance.generateServerTransform("TestTransform", null));
     }
 
     @Test
     public void testGenerateServerTransformWithoutName()
     {
-        assertFalse(instance.generateServerTransform(null, null).isPresent());
+        Assert.assertFalse(instance.generateServerTransform(null, null).isPresent());
     }
 
     @Test
     public void testGenerateServerTransformNameWithoutParams()
     {
         ServerTransform transform = instance.generateServerTransform("TestTransform", null).get();
-        assertEquals("TestTransform", transform.getName());
-        assertEquals(0, transform.size());
+        Assert.assertEquals("TestTransform", transform.getName());
+        Assert.assertEquals(0, transform.size());
     }
     
     @Test
@@ -193,8 +193,8 @@ public class MarkLogicConfigurationTest
     {
         instance.setServerTransform("TestTransform");
         ServerTransform transform = instance.generateServerTransform(null, null).get();
-        assertEquals("TestTransform", transform.getName());
-        assertEquals(0, transform.size());
+        Assert.assertEquals("TestTransform", transform.getName());
+        Assert.assertEquals(0, transform.size());
     }
 
     @Test
@@ -202,16 +202,16 @@ public class MarkLogicConfigurationTest
     {
         instance.setServerTransform("TestTransform-Not-Used");
         ServerTransform transform = instance.generateServerTransform("TestTransform", null).get();
-        assertEquals("TestTransform", transform.getName());
-        assertEquals(0, transform.size());
+        Assert.assertEquals("TestTransform", transform.getName());
+        Assert.assertEquals(0, transform.size());
     }
     
     @Test
     public void testGenerateServerTransformWithEmptyParams()
     {
         ServerTransform transform = instance.generateServerTransform("TestTransform", "   ").get();
-        assertEquals("TestTransform", transform.getName());
-        assertEquals(0, transform.size());
+        Assert.assertEquals("TestTransform", transform.getName());
+        Assert.assertEquals(0, transform.size());
     }
 
     @Test
@@ -220,8 +220,8 @@ public class MarkLogicConfigurationTest
         instance.setServerTransform("TestTransform");
         instance.setServerTransformParams("null");
         ServerTransform transform = instance.generateServerTransform(null, "not-used").get();
-        assertEquals("TestTransform", transform.getName());
-        assertEquals(0, transform.size());
+        Assert.assertEquals("TestTransform", transform.getName());
+        Assert.assertEquals(0, transform.size());
     }
 
     @Test(expected = MarkLogicConnectorException.class)
@@ -263,7 +263,7 @@ public class MarkLogicConfigurationTest
             transform = instance.generateServerTransform(null, null).get();
         }
         
-        assertEquals(name, transform.getName());
+        Assert.assertEquals(name, transform.getName());
 
         transformParamTester(transform, "entity-name", "MyEntity");
         transformParamTester(transform, "flow-name", "loadMyEntity");
@@ -271,10 +271,10 @@ public class MarkLogicConfigurationTest
 
     private void transformParamTester(ServerTransform transform, String key, String value)
     {
-        assertTrue(transform.containsKey(key));
+        Assert.assertTrue(transform.containsKey(key));
 
         List<String> list = transform.get(key);
-        assertEquals(1, list.size());
-        assertEquals(value, list.get(0));
+        Assert.assertEquals(1, list.size());
+        Assert.assertEquals(value, list.get(0));
     }
 }
