@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.marklogic</groupId> 
+    <packaging>mule-extension</packaging>
+    <name>MarkLogic Connector - Mule 4</name>
+    <parent>
+        <groupId>org.mule.connectors</groupId>
+        <artifactId>mule-certified-parent</artifactId>
+        <version>1.4.1</version>
+    </parent>
+    <groupId>com.marklogic</groupId>
     <artifactId>marklogic-mule-connector</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <app.runtime>4.4.0</app.runtime>
-        <mule.maven.plugin.version>3.8.2</mule.maven.plugin.version>
         <munit.version>2.3.14</munit.version>
     </properties>
     <build>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -22,10 +29,11 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
+                <version>3.8.2</version>
                 <extensions>true</extensions>
             </plugin>
             <plugin>
@@ -160,6 +168,38 @@
         </plugins>
     </build>
     <dependencies>
+        <!--
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-api</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-extensions-api</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-extension-ast-loader</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-module-service</artifactId>
+            <version>${app.runtime}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-core</artifactId>
+            <version>${app.runtime}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-module-extensions-spring-support</artifactId>
+            <version>${app.runtime}</version>
+        </dependency>
+        -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -198,9 +238,34 @@
             <version>2.11.0</version>
         </dependency>
         <dependency>
+            <groupId>org.mule.tests.plugin</groupId>
+            <artifactId>mule-tests-component-plugin</artifactId>
+            <version>${app.runtime}</version>
+            <scope>test</scope>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.tests</groupId>
+            <artifactId>mule-tests-functional</artifactId>
+            <version>${app.runtime}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.tests</groupId>
+            <artifactId>mule-tests-runner</artifactId>
+            <version>${app.runtime}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.tests</groupId>
+            <artifactId>mule-tests-unit</artifactId>
+            <version>${app.runtime}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-file-connector</artifactId>
-            <version>1.1.3</version>
+            <version>1.5.0</version>
             <classifier>mule-plugin</classifier>
         </dependency>
         <dependency>
@@ -229,13 +294,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <packaging>mule-extension</packaging>
-    <name>MarkLogic Connector - Mule 4</name>
-    <parent>
-        <groupId>org.mule.connectors</groupId>
-        <artifactId>mule-certified-parent</artifactId>
-        <version>1.4.1</version>
-    </parent>
     <repositories>
         <repository>
             <id>mule-releases</id>
