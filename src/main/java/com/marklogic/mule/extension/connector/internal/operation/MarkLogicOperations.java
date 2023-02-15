@@ -31,6 +31,7 @@ import com.marklogic.client.query.RawStructuredQueryDefinition;
 import com.marklogic.client.query.StructuredQueryDefinition;
 import com.marklogic.mule.extension.connector.api.operation.MarkLogicQueryFormat;
 import com.marklogic.mule.extension.connector.api.operation.MarkLogicQueryStrategy;
+import com.marklogic.mule.extension.connector.internal.MarkLogicAttributes;
 import com.marklogic.mule.extension.connector.internal.config.MarkLogicConfiguration;
 import com.marklogic.mule.extension.connector.internal.connection.MarkLogicConnection;
 import com.marklogic.mule.extension.connector.internal.error.provider.MarkLogicExecuteErrorsProvider;
@@ -56,6 +57,7 @@ import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.extension.api.annotation.param.display.Text;
+import org.mule.runtime.extension.api.runtime.operation.Result;
 import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -447,7 +449,7 @@ public class MarkLogicOperations
     // sonarqube flags this because of the number of args, but not certain that it can be safely modified without
     // causing a breaking change
     @SuppressWarnings("java:S107")
-    public PagingProvider<MarkLogicConnection, Object> exportDocs(
+    public PagingProvider<MarkLogicConnection, Result<Object, MarkLogicAttributes>> exportDocs(
             @Config MarkLogicConfiguration configuration,
             @DisplayName("Serialized Query String")
             @Summary("The serialized query XML or JSON.")
@@ -472,11 +474,11 @@ public class MarkLogicOperations
             @Example("entity-name,MyEntity,flow-name,loadMyEntity") String serverTransformParams
     )
     {
-        return new PagingProvider<MarkLogicConnection, Object>() {
+        return new PagingProvider<MarkLogicConnection, Result<Object, MarkLogicAttributes>>() {
             private final AtomicBoolean pageReturned = new AtomicBoolean(false);
 
             @Override
-            public List<Object> getPage(MarkLogicConnection markLogicConnector)
+            public List<Result<Object, MarkLogicAttributes>> getPage(MarkLogicConnection markLogicConnector)
             {
                 if (pageReturned.get()) {
                     return new ArrayList<>();
@@ -511,6 +513,7 @@ public class MarkLogicOperations
                 batcher.awaitCompletion();
                 dmm.stopJob(batcher);
                 pageReturned.set(true);
+                LOGGER.info("DOCS: " + exportListener.getDocs());
                 return exportListener.getDocs();
             }
 
